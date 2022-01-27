@@ -197,20 +197,16 @@ public class RecordService extends Service {
         RecordService.currentConfig = currentConfig;
     }
 
-    /**
-     * 根据当前的时间生成相应的文件名
-     * 实例 record_20160101_13_15_12
-     */
     private static String getFilePath() {
 
         String fileDir =
                 currentConfig.getRecordDir();
         if (!FileUtils.createOrExistsDir(fileDir)) {
-            Logger.w(TAG, "文件夹创建失败：%s", fileDir);
+            Logger.w(TAG, "File location is：%s", fileDir);
             return null;
         }
-        String fileName = String.format(Locale.getDefault(), "record_%s", FileUtils.getNowString(new SimpleDateFormat("yyyyMMdd_HH_mm_ss", Locale.SIMPLIFIED_CHINESE)));
-        return String.format(Locale.getDefault(), "%s%s%s", fileDir, fileName, currentConfig.getFormat().getExtension());
+        String fileName = String.format(Locale.getDefault(), "bg_audio_%s", FileUtils.getNowString(new SimpleDateFormat("yyyyMMdd_HH_mm_ss", Locale.US)));
+        return String.format(Locale.US, "%s%s%s", fileDir, fileName, currentConfig.getFormat().getExtension());
     }
 
 
